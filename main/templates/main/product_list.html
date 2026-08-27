@@ -1,0 +1,109 @@
+{% extends "main/base.html" %}
+
+{% block title %} {{ title }} | GreenStore {% endblock title %}
+
+{% block content %}
+
+<div class="categories-menu">
+  <a
+    href="{% url 'main:product_list' %}"
+    class="category-link {% if not category %}active{% endif %}"
+  >
+    Увесь асортимент
+  </a>
+  {% for cat in categories %}
+  <a
+    href="{{ cat.get_absolute_url }}"
+    class="category-link {% if category.slug == cat.slug %}active{% endif %}"
+  >
+    {{ cat.name }} ({{ cat.products.count }})
+  </a>
+  {% endfor %}
+</div>
+
+<div class="sort-container">
+  <span class="sort-label">Впорядкувати:</span>
+  <div class="sort-buttons">
+    <a
+      href="?sort=new"
+      class="sort-btn {% if current_sort == 'new' or not current_sort %}active{% endif %}"
+    >
+      Новинки
+    </a>
+    <a
+      href="?sort=old"
+      class="sort-btn {% if current_sort == 'old' %}active{% endif %}"
+    >
+      Старіші
+    </a>
+    <a
+      href="?sort=popular"
+      class="sort-btn {% if current_sort == 'popular' %}active{% endif %}"
+    >
+      Популярні
+    </a>
+    <a
+      href="?sort=price_asc"
+      class="sort-btn {% if current_sort == 'price_asc' %}active{% endif %}"
+    >
+      Від дешевших
+    </a>
+    <a
+      href="?sort=price_desc"
+      class="sort-btn {% if current_sort == 'price_desc' %}active{% endif %}"
+    >
+      Від дорожчих
+    </a>
+  </div>
+</div>
+
+<h1 class="page-title">Каталог продукції</h1>
+
+{% if products %}
+  <div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+      <a href="{{ product.get_absolute_url }}" class="product-image-link">
+        <div class="product-image-wrapper">
+          {% if product.image %}
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.name }}"
+              class="product-image"
+            />
+          {% else %}
+            <div class="no-image-placeholder">
+              <span>Без фотографії</span>
+            </div>
+          {% endif %}
+        </div>
+      </a>
+
+      <div class="product-info">
+        <h3 class="product-title">
+          <a href="{{ product.get_absolute_url }}" class="product-title-link">
+            {{ product.name }}
+          </a>
+        </h3>
+
+        <div class="product-views">
+          <span>👁️ {{ product.views }} переглядів</span>
+        </div>
+
+        <p class="product-desc">{{ product.description|truncatewords:12 }}</p>
+
+        <div class="product-footer">
+          <span class="product-price">{{ product.price }} грн</span>
+          <a href="{{ product.get_absolute_url }}" class="btn-details">
+            Переглянути
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty-list">На жаль, у цьому розділі поки немає доступних пропозицій.</p>
+{% endif %}
+
+{% endblock content %}

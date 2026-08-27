@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% load account_filters account_tags %}
+
+{% block title %}Особистий кабінет | GreenStore{% endblock title %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        {{ user.username|first|upper }}
+      </div>
+      <div>
+        <h1 class="profile-username">{{ user.username }}</h1>
+        <span class="role-badge {% if user.is_staff %}role-admin{% else %}role-user{% endif %}">
+          {{ user|user_role }}
+        </span>
+      </div>
+    </div>
+
+    <div class="profile-details">
+      <div class="detail-row">
+        <span class="detail-label">Ім'я користувача:</span>
+        <span class="detail-value">{{ user.username }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email-адреса:</span>
+        <span class="detail-value">{{ user.email|default:"Не вказано" }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Дата реєстрації:</span>
+        <span class="detail-value">
+            {{ user.date_joined|date:"d.m.Y H:i" }}
+            ({% days_on_site user.date_joined %})
+        </span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Останній візит:</span>
+        <span class="detail-value">{{ user.last_login|date:"d.m.Y H:i"|default:"Ще не зафіксовано" }}</span>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <a href="{% url 'main:product_list' %}" class="btn-back">
+        ← Повернутися до асортименту
+      </a>
+      <form method="post" action="{% url 'accounts:logout' %}" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="btn-danger">Завершити сеанс</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

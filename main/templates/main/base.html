@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Головна | GreenStore{% endblock title %}</title>
+    <!-- Версія кешу v=6 для точного оновлення -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
+</head>
+<body>
+    <header class="navbar">
+      <div class="navbar-container">
+        <a href="{% url 'main:product_list' %}" class="nav-brand"><span>Green</span>Store</a>
+
+        <nav class="nav-links">
+          <a href="{% url 'main:product_list' %}" class="nav-item">Асортимент</a>
+
+          {% if user.is_authenticated %}
+            {% if user.is_staff %}
+              <a href="{% url 'admin:index' %}" class="nav-item nav-admin" target="_blank">Панель керування</a>
+            {% endif %}
+            <a href="{% url 'accounts:profile' %}" class="nav-item nav-user">
+              👋 Вітаємо, {{ user.username }}
+            </a>
+            <form method="post" action="{% url 'accounts:logout' %}" class="nav-inline-form">
+              {% csrf_token %}
+              <button type="submit" class="nav-btn-logout">Завершити сеанс</button>
+            </form>
+          {% else %}
+            <a href="{% url 'accounts:login' %}" class="nav-item">Увійти</a>
+            <a href="{% url 'accounts:register' %}" class="btn-register">Створити акаунт</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+</html>

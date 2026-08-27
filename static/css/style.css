@@ -1,0 +1,813 @@
+/* ==========================================================================
+   1. Глобальні змінні, Шрифти та Скидання (Premium Green Theme)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Кольорова палітра */
+  --primary-color: #10b981; /* М'який смарагдовий */
+  --primary-hover: #059669; /* Глибокий смарагдовий */
+  --primary-light: #ecfdf5;
+
+  --bg-color: #f8fafc; /* Дуже світлий, приємний сіро-блакитний фон */
+  --card-bg: #ffffff;
+
+  --text-main: #334155;
+  --text-muted: #64748b;
+
+  --border-light: #e2e8f0;
+
+  --danger-color: #ef4444;
+  --danger-bg: #fef2f2;
+
+  /* Радіуси та Тіні для професійного вигляду */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-pill: 99px;
+  --shadow-soft: 0 10px 25px rgba(16, 185, 129, 0.08);
+  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Робить шрифти чіткішими на екранах */
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 40px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: var(--radius-pill);
+}
+
+/* ==========================================================================
+   2. Навігаційна панель
+   ========================================================================== */
+.navbar {
+  background-color: #0f172a; /* Глибокий темно-синій/сірий для контрасту */
+  border-bottom: none;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.nav-brand span {
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #cbd5e1;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.nav-admin {
+  color: #0f172a;
+  background-color: #fde047;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.nav-admin:hover {
+  background-color: #facc15;
+  color: #0f172a;
+}
+
+.btn-register {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.btn-register:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
+}
+
+.nav-inline-form {
+  margin: 0;
+}
+
+.nav-btn-logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f87171;
+  padding: 6px 10px;
+  transition: color 0.3s ease;
+}
+
+.nav-btn-logout:hover {
+  color: #ef4444;
+}
+
+/* ==========================================================================
+   3. Каталог: Меню категорій та Панель сортування
+   ========================================================================== */
+.categories-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.category-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+
+.category-link:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.category-link.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  background-color: var(--card-bg);
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.sort-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.sort-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sort-btn {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.sort-btn:hover {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+
+.sort-btn.active {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   4. Каталог: Сітка та картки товарів
+   ========================================================================== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s ease;
+  border: 1px solid transparent;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--primary-light);
+}
+
+.product-image-link {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.product-image-wrapper {
+  width: 100%;
+  height: 240px;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.08);
+}
+
+.no-image-placeholder {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.product-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.product-title-link {
+  text-decoration: none;
+  color: var(--text-main);
+  transition: color 0.3s ease;
+}
+
+.product-title-link:hover {
+  color: var(--primary-color);
+}
+
+.product-views {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.product-desc {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary-color);
+}
+
+.btn-details {
+  display: inline-block;
+  text-decoration: none;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  transition: all 0.3s ease;
+}
+
+.btn-details:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+}
+
+.empty-list {
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin: 60px 0;
+  padding: 40px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================================================
+   5. Детальна сторінка товару
+   ========================================================================== */
+.product-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0 60px;
+}
+
+.product-detail-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.category-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.category-badge:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.product-detail-header h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0 0 16px 0;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.product-detail-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: var(--shadow-soft);
+}
+
+.product-image-large {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-detail-main .product-price {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 2px dashed var(--border-light);
+}
+
+.product-description h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 16px 0;
+}
+
+.product-description p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin: 0 0 30px 0;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.btn-back:hover {
+  background-color: var(--text-main);
+  color: #ffffff;
+}
+
+/* Блок схожих товарів */
+.related-products-section {
+  padding-top: 40px;
+}
+
+.related-products-section h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0 0 30px 0;
+}
+
+.related-products-section .product-card a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+}
+
+.related-products-section .product-card img,
+.related-products-section .product-card .no-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.related-products-section .product-card .no-image {
+  background-color: var(--bg-color);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.related-products-section .product-card h4 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+}
+
+.related-products-section .product-card:hover h4 {
+  color: var(--primary-color);
+}
+
+.related-products-section .product-card .price {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   6. Автентифікація (Логін та Реєстрація)
+   ========================================================================== */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(80vh - 80px);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 48px 40px;
+  box-shadow: var(--shadow-soft);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.auth-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0 0 12px 0;
+}
+
+.auth-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-input {
+  width: 100% !important;
+  padding: 14px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.btn-auth {
+  width: 100%;
+  padding: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-auth:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.auth-footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   7. Профіль користувача
+   ========================================================================== */
+.profile-card {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 48px;
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  font-size: 36px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-username {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0 0 10px 0;
+}
+
+.role-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.role-user {
+  background-color: var(--bg-color);
+  color: var(--text-muted);
+}
+
+.role-admin {
+  background-color: #fef08a;
+  color: #854d0e;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--border-light);
+  font-size: 16px;
+}
+
+.detail-label {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.detail-value {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-danger {
+  font-family: 'Nunito', sans-serif;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--danger-color);
+  background-color: var(--danger-bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-color);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   8. Адаптивність (Mobile & Tablet)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .product-detail-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
