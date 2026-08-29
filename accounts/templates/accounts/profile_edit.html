@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Редагування профілю | GreenStore{% endblock title %}
+
+{% block content %}
+<div class="auth-container" style="min-height: auto; padding-top: 40px;">
+  <div class="auth-card" style="max-width: 600px;">
+    <div class="auth-header">
+      <h2 class="auth-title">Редагування профілю</h2>
+      <p class="auth-subtitle">Оновіть свої особисті дані</p>
+    </div>
+
+    <div class="auth-body">
+      <form method="post" enctype="multipart/form-data" class="auth-form" novalidate>
+        {% csrf_token %}
+        
+        <!-- Поля User -->
+        {% for field in user_form %}
+        <div class="form-group">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="field-error">{{ field.errors.0 }}</div>
+          {% endif %}
+        </div>
+        {% endendfor %}
+
+        <hr style="border: 0; border-top: 1px dashed var(--border-light); margin: 10px 0;">
+
+        <!-- Поля Profile -->
+        {% for field in profile_form %}
+        <div class="form-group">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="field-error">{{ field.errors.0 }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+          <button type="submit" class="btn-auth" style="flex: 1; margin-top: 0;">Зберегти зміни</button>
+          <a href="{% url 'accounts:profile' %}" class="btn-back" style="flex: 1; margin-top: 0; text-align: center; border-radius: var(--radius-pill);">Скасувати</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
