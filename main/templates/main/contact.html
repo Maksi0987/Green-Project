@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }} | GreenStore{% endblock title %}
+
+{% block content %}
+<div class="auth-container" style="padding-top: 40px; min-height: auto;">
+  <div class="auth-card" style="max-width: 600px;">
+    <div class="auth-header">
+      <h2 class="auth-title">Контакти</h2>
+      <p class="auth-subtitle">Зв'яжіться з нашою адміністрацією</p>
+    </div>
+
+    <div class="auth-body">
+      {% if messages %}
+        <div class="messages-container">
+          {% for message in messages %}
+            <div style="background-color: var(--primary-light); color: var(--primary-hover); border: 1px solid var(--primary-border); padding: 12px 20px; border-radius: var(--radius-md); font-weight: 700; text-align: center; margin-bottom: 15px;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" class="auth-form" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="form-errors">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        {% for field in form %}
+          <div class="form-group">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="field-error">{{ field.errors.0 }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-auth">Відправити</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

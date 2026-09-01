@@ -38,5 +38,9 @@
     <main>
         {% block content %}{% endblock content %}
     </main>
+
+    <footer style="text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid var(--border-light);">
+        <a href="{% url 'main:contact' %}" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Контакти / Зворотний зв'язок</a>
+    </footer>
 </body>
 </html>
